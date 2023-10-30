@@ -1,0 +1,115 @@
+{% extends "./base.html" %}
+
+{% block tittle %} Gestión de Recetas {% endblock %}
+
+{% block body%}
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-dismissible
+      {% if message.tags == 'success' %}
+        alert-success
+      {% elif message.tags == 'info' %}
+        alert-info
+      {% elif message.tags == 'error' %}
+        alert-danger
+      {% endif %}" id="auto-fade-alert">
+      <a href=""><i class="fa-solid fa-xmark" data-dismiss="alert"></i></a>
+
+      <strong class="text-dark"> {{ message }}</strong>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+
+
+    <h2>Ingrese una Receta</h2>
+    <div class="card cardagregar">
+      <div class="card-body">
+        <form action="/registrarReceta/" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group inputRecetas">
+            <div class="coolinput">
+              <label for="input" class="text">Nombre:</label>
+              <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre de la receta"
+                maxlength="50" required />
+            </div>
+          </div>
+          <div class="form-group inputRecetas">
+            <div class="coolinput w-100">
+              <label for="input" class="text">Dificultad:</label>
+              <input type="number" id="numDificultad" name="numDificultad" class="form-control"
+                placeholder="Dificultad (De 1 a 5)" min="1" max="5" required />
+            </div>
+
+          </div>
+
+          <div class="form-group inputRecetas">
+            <div class="coolinput">
+              <label for="input" class="text">Imagen:</label>
+              <input class="form-control" type="file" id="txtImagen" name="txtImagen" required />
+            </div>
+          </div>
+          <div class="form-group inputRecetas">
+            <button type="submit" class="btn btn-success btn-block text-white">
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+    <h1>Listado de Recetas</h1>
+    <form method="GET" action="{% url 'buscarReceta' %}">
+      
+      <div class="input-group mb-3">
+         <input type="text" class="form-control" placeholder="Buscar receta" name="txtBuscar">
+         <div class="input-group-append">
+           <button class="btn btn-primary" type="submit">Buscar</button>
+         </div>
+      </div>
+     </form>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          
+          <tr>
+            <th>#</th>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Dificultad</th>
+            <th>Imagen</th>
+            <th colspan="3">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in recetas %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{c.codigo}}</td>
+            <td>{{c.nombre}}</td>
+            <td>{{c.dificultad}}</td>
+            <td><img src="../media/{{c.imagen}}" width="50" height="50" /></td>
+            <td>
+              <a href="/receta/{{c.codigo}}" class="btn btn-success"><i class="fa-solid fa-eye"
+                  style="color: #fff;"></i></a>
+            </td>
+            <td>
+              <a href="/editarReceta/{{c.codigo}}" class="btn btn-info"><i class="fa-regular fa-pen-to-square"
+                  style="color: #fff;"></i></a>
+            </td>
+            <td>
+              <a href="#" class="btn btn-danger btnEliminacion" onclick="confirmarEliminacion('{{ c.codigo }}')">
+                <i class="fa-solid fa-trash-can"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

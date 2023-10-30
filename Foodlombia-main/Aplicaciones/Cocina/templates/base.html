@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gestionRecetas.css' %}">
+    <link rel="stylesheet" href="{% static 'css/editarReceta.css' %}">
+    
+
+    <link rel="shortcut icon" href="{% static 'img/logo.png' %}">
+    <title>{% block tittle %} {% endblock %}</title>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <a href='/index/'>
+                    <h3></span><span><img src="{% static 'img/logo.png' %}" style="width: 20%;"></span><span
+                            style="color: #eeff03;">Food</span><span style="color: #1285e2;">lom</span></span><span
+                            style="color: #e21212;">bia</span></h3>
+                </a>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="#RecetasSubmenu" data-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle">Recetas</a>
+                    <ul class="collapse list-unstyled" id="RecetasSubmenu">
+                        <li>
+                            <a href="../gestionRecetas">Gestion de Recetas</a>
+                        </li>
+                        <li>
+                            <a href="#">Categorias</a>
+                        </li>
+                        <li>
+                            <a href="#">Ingredientes</a>
+                        </li>
+                        <li>
+                            <a href="#">Postres</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#ForoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Foro</a>
+                    <ul class="collapse list-unstyled" id="ForoSubmenu">
+                        <li>
+                            <a href="#">Secciones</a>
+                        </li>
+                        <li>
+                            <a href="#">Miembros</a>
+                        </li>
+                        <li>
+                            <a href="#">Chefs</a>
+                        </li>
+                        <li>
+                            <a href="#">Directos</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#ConfigSubmenu" data-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle">Configuracion</a>
+                    <ul class="collapse list-unstyled" id="ConfigSubmenu">
+                        <li>
+                            <a href="#">Ayuda</a>
+                        </li>
+                        <li>
+                            <a href="#">Preferencias</a>
+                        </li>
+                        <li>
+                            <a href="#">Modo oscuro</a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+                <p>Redes sociales</p>
+                <li>
+                    
+                    <i class="fa-brands fa-facebook fa-2xl" style="margin: 15px;"></i>
+                    <i class="fa-brands fa-twitter fa-2xl" style="margin: 15px;"></i>
+                    <i class="fa-brands fa-instagram fa-2xl" style="margin: 15px;"></i>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" style="padding: 0;">
+            <nav class="navbar bg-body-tertiary" style="margin-left: 0; padding: 10px 10px 10px 0px;">
+                <div class="container-fluid" style="padding-left: 0;">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info"
+                        style="background-color: #00000000; border-color: #00000000; color: #1b1b1b; padding: 0; margin-left: 10px;">
+                        <i class="fas fa-align-justify" style="font-size: 1.5rem;"></i>
+                    </button>
+                    
+                    <div class="fondo">
+                        <input type="text" placeholder="Buscar" class="inputBuscar">
+                        <i class="fa-solid fa-magnifying-glass ibuscar"></i> 
+                    </div>
+                    <!-- Botón que abre el menú desplegable -->
+                    <div class="dropdown">
+                        <button id="userbutton" style="background-color: #49795f; border-color: #49795f;" type="button"
+                            data-toggle="dropdown">
+                            <i class="fa-solid fa-user"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="usuario/login.html">Iniciar sesión</a>
+                            <a class="dropdown-item" href="#register">Registrarse</a>
+                            <!-- Agrega más opciones si lo necesitas -->
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+
+
+            <div class="container">
+                {% block body %}
+
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/fc0aa6ab36.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/gestionRecetas.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+
+</body>
+
+</html>
